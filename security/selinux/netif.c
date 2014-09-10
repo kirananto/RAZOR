@@ -56,7 +56,11 @@ static struct list_head sel_netif_hash[SEL_NETIF_HASH_SIZE];
  */
 static inline u32 sel_netif_hashfn(const struct net *ns, int ifindex)
 {
+<<<<<<< HEAD
 	return (((uintptr_t)ns + ifindex) & (SEL_NETIF_HASH_SIZE - 1));
+=======
+	return ((uintptr_t)ns + ifindex) & (SEL_NETIF_HASH_SIZE - 1);
+>>>>>>> bc03f21... selinux: make the netif cache namespace aware
 }
 
 /**
