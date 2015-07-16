@@ -23,6 +23,14 @@ config IOSCHED_TEST
 	  according to the test case and declare PASS/FAIL according to the
 	  requests completion error code.
 
+config IOSCHED_ZEN
+	tristate "Zen I/O scheduler"
+	default y
+	---help---
+	  Based on the VR Scheduler. It's an FCFS (First come, first serve)
+	  based algorithm.
+	  It's not strictly FIFO. It does not do any sorting.
+
 config IOSCHED_DEADLINE
 	tristate "Deadline I/O scheduler"
 	default y
@@ -139,6 +147,7 @@ config DEFAULT_IOSCHED
 	default "fiops" if DEFAULT_FIOPS
 	default "bfq" if DEFAULT_BFQ
 	default "noop" if DEFAULT_NOOP
+	default "zen" if DEFAULT_ZEN
 
 endmenu
 
