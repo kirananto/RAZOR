@@ -457,7 +457,7 @@ extern struct cpufreq_governor cpufreq_gov_impulse;
 extern struct cpufreq_governor cpufreq_gov_yankzactive;
 #define CPUFREQ_DEFAULT_GOVERNOR	(&cpufreq_gov_yankzactive)
 #endif
-#endif
+
 
 /*********************************************************************
  *                     FREQUENCY TABLE HELPERS                       *
