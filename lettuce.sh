@@ -41,14 +41,18 @@ echo "                                        Compiling RaZorReborn kernel      
 echo "                    "
 echo -e "**********************************************************************************************"
 make cyanogenmod_lettuce-64_defconfig
-make -j4
-$DTBTOOL -2 -o $KERNEL_DIR/arch/arm64/boot/dt.img -s 2048 -p $KERNEL_DIR/scripts/dtc/ $KERNEL_DIR/arch/arm64/boot/dts/
+make Image -j12
+make dtbs -j12
+make modules -j12
 if ! [ -a $KERN_IMG ];
 then
 echo -e "$red Kernel Compilation failed! Fix the errors! $nocol"
 exit 1
 fi
+$DTBTOOL -2 -o $KERNEL_DIR/arch/arm64/boot/dt.img -s 2048 -p $KERNEL_DIR/scripts/dtc/ $KERNEL_DIR/arch/arm/boot/dts/
+
 }
+
 case $1 in
 clean)
 make ARCH=arm64 -j8 clean mrproper
@@ -59,6 +63,7 @@ compile_kernel
 ;;
 esac
 cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../LettuceOutput/tools
+cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../LettuceOutput/tools
 BUILD_END=$(date +"%s")
 DIFF=$(($BUILD_END - $BUILD_START))
 echo -e "$yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"
