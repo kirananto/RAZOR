@@ -224,8 +224,6 @@
 				aw2013,off-time-ms = <1>;
 			};
 		};
-
->>>>>>> upstream/cm-12.1
 	};
 
 	hall_sensor {
