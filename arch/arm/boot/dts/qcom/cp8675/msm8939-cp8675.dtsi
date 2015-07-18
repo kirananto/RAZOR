@@ -173,6 +173,15 @@
 				};
 			};
 		};
+		aw-leds@45 {
+			compatible = "aw-leds";
+			reg = <0x45>;
+			vdd_ana-supply = <&pm8916_l17>;
+			aw_leds,gpio = <1018>;
+			aw_leds,led0 = <2>;
+			aw_leds,led1 = <1>;
+			aw_leds,led2 = <0>;
+		};
 		aw2013@45 {
 			compatible = "awinic,aw2013";
 			reg = <0x45>;
@@ -216,6 +225,7 @@
 			};
 		};
 
+>>>>>>> upstream/cm-12.1
 	};
 
 	hall_sensor {
