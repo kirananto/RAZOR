@@ -41,9 +41,9 @@ echo "                                        Compiling RaZorReborn kernel      
 echo "                    "
 echo -e "**********************************************************************************************"
 make cyanogenmod_tomato-64_defconfig
-make Image -j8
-make dtbs -j8
-make modules -j8
+make Image -j12
+make dtbs -j12
+make modules -j12
 if ! [ -a $KERN_IMG ];
 then
 echo -e "$red Kernel Compilation failed! Fix the errors! $nocol"
