@@ -82,7 +82,7 @@ cp $MODULES_DIR/wlan.ko $MODULES_DIR/../TomatoOutput/system/lib/modules/
 cp $MODULES_DIR/ntfs.ko $MODULES_DIR/../TomatoOutput/system/lib/modules/
 cp $MODULES_DIR/cifs.ko $MODULES_DIR/../TomatoOutput/system/lib/modules/
 cd /home/kiran/Downloads/RaZoRReborn/RaZORBUILDOUTPUT/TomatoOutput
-zip -r -9 "RAZORREBORNV1.3TOMATO-$(date +"%Y-%m-%d-%I-%M").zip" system tools META-INF
+zip -r -9 "RAZORREBORNV1.3TOMATO-$(date +"%Y-%m-%d(%I.%M%p)").zip" system tools META-INF
 BUILD_END=$(date +"%s")
 DIFF=$(($BUILD_END - $BUILD_START))
 echo -e "$yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"

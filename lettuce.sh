@@ -64,7 +64,7 @@ esac
 cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../LettuceOutput/tools
 cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../LettuceOutput/tools
 cd /home/kiran/Downloads/RaZoRReborn/RaZORBUILDOUTPUT/LettuceOutput
-zip -r -9 "RAZORREBORNV1.3LETTUCE-$(date +"%Y-%m-%d-%I-%M").zip" tools META-INF
+zip -r -9 "RAZORREBORNV1.3LETTUCE-$(date +"%Y-%m-%d(%I.%M%p)").zip" tools META-INF
 BUILD_END=$(date +"%s")
 DIFF=$(($BUILD_END - $BUILD_START))
 echo -e "$yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"
