@@ -41,7 +41,6 @@ echo "                                        Compiling RaZorReborn kernel      
 echo "                    "
 echo -e "**********************************************************************************************"
 make cyanogenmod_lettuce-64_defconfig
-make menuconfig
 make Image -j8
 make dtbs -j8
 make modules -j8
