@@ -41,29 +41,15 @@ echo "                                        Compiling RaZorReborn kernel      
 echo "                    "
 echo -e "**********************************************************************************************"
 make cyanogenmod_lettuce-64_defconfig
-make menuconfig
-make Image -j8
-make dtbs -j8
-make modules -j8
+make Image -j12
+make dtbs -j12
 if ! [ -a $KERN_IMG ];
 then
 echo -e "$red Kernel Compilation failed! Fix the errors! $nocol"
 exit 1
 fi
 $DTBTOOL -2 -o $KERNEL_DIR/arch/arm64/boot/dt.img -s 2048 -p $KERNEL_DIR/scripts/dtc/ $KERNEL_DIR/arch/arm/boot/dts/
-strip_modules
-}
 
-strip_modules ()
-{
-echo "Copying modules"
-rm $MODULES_DIR/*
-find . -name '*.ko' -exec cp {} $MODULES_DIR/ \;
-cd $MODULES_DIR
-echo "Stripping modules for size"
-$STRIP --strip-unneeded *.ko
-zip -9 modules *
-cd $KERNEL_DIR
 }
 
 case $1 in
@@ -75,7 +61,6 @@ rm -rf $KERNEL_DIR/arch/arm/boot/dt.img
 compile_kernel
 ;;
 esac
-cp $MODULES_DIR/wlan.ko $MODULES_DIR/../LettuceOutput/system/lib/modules/
 cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../LettuceOutput/tools
 cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../LettuceOutput/tools
 cd /home/kiran/Downloads/RaZoRReborn/RaZORBUILDOUTPUT/LettuceOutput
