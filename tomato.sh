@@ -60,7 +60,6 @@ find . -name '*.ko' -exec cp {} $MODULES_DIR/ \;
 cd $MODULES_DIR
 echo "Stripping modules for size"
 $STRIP --strip-unneeded *.ko
-zip -9 modules *
 cd $KERNEL_DIR
 }
 
