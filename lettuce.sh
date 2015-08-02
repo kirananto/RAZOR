@@ -64,7 +64,10 @@ esac
 cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../LettuceOutput/tools
 cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../LettuceOutput/tools
 cd /home/kiran/Downloads/RaZoRReborn/RaZORBUILDOUTPUT/LettuceOutput
-zip -r -9 "RRV1.4LETTUCE-$(date +"%Y-%m-%d(%I.%M%p)").zip" tools META-INF
+echo -n "Enter The Zip file Name : "
+read zipfile
+echo $zipfile
+zip -r $zipfile tools META-INF -x *kernel/.gitignore*
 BUILD_END=$(date +"%s")
 DIFF=$(($BUILD_END - $BUILD_START))
 echo -e "$yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"

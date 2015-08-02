@@ -79,7 +79,9 @@ cp $MODULES_DIR/wlan.ko $MODULES_DIR/../TomatoOutput/system/lib/modules/
 cp $MODULES_DIR/ntfs.ko $MODULES_DIR/../TomatoOutput/system/lib/modules/
 cp $MODULES_DIR/cifs.ko $MODULES_DIR/../TomatoOutput/system/lib/modules/
 cd /home/kiran/Downloads/RaZoRReborn/RaZORBUILDOUTPUT/TomatoOutput
-zipfile="RRV1.4TOMATO-$(date +"%Y-%m-%d(%I.%M%p)").zip"
+echo -n "Enter The Zip file Name : "
+read zipfile
+echo $zipfile
 zip -r $zipfile system tools META-INF -x *kernel/.gitignore*
 BUILD_END=$(date +"%s")
 DIFF=$(($BUILD_END - $BUILD_START))
