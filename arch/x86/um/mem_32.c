@@ -43,12 +43,4 @@ int in_gate_area_no_mm(unsigned long addr)
 	return 0;
 }
 
-int in_gate_area(struct mm_struct *mm, unsigned long addr)
-{
-	struct vm_area_struct *vma = get_gate_vma(mm);
-
-	if (!vma)
-		return 0;
-
-	return (addr >= vma->vm_start) && (addr < vma->vm_end);
-}
+int in_gate_area(struct mm_struct *mm, unsigned long ad
