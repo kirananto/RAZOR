@@ -75,13 +75,9 @@ esac
 cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../TomatoOutput/tools
 cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../TomatoOutput/tools
 mv $MODULES_DIR/../TomatoOutput/tools/Image $MODULES_DIR/../TomatoOutput/tools/zImage
-cp $MODULES_DIR/wlan.ko $MODULES_DIR/../TomatoOutput/system/lib/modules/
-cp $MODULES_DIR/ntfs.ko $MODULES_DIR/../TomatoOutput/system/lib/modules/
-cp $MODULES_DIR/cifs.ko $MODULES_DIR/../TomatoOutput/system/lib/modules/
+cp $MODULES_DIR/* $MODULES_DIR/../TomatoOutput/system/lib/modules/
 cd $MODULES_DIR/../TomatoOutput
-echo -n "Enter The Zip file Name : "
-read zipfile
-echo $zipfile
+zipfile="RRV1.4TOMATO-$(date +"%Y-%m-%d(%I.%M%p)").zip"
 zip -r $zipfile system tools META-INF -x *kernel/.gitignore*
 dropbox_uploader -p upload $MODULES_DIR/../TomatoOutput/$zipfile /
 dropbox_uploader share /$zipfile
