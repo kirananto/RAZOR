@@ -49,8 +49,20 @@ echo -e "$red Kernel Compilation failed! Fix the errors! $nocol"
 exit 1
 fi
 $DTBTOOL -2 -o $KERNEL_DIR/arch/arm64/boot/dt.img -s 2048 -p $KERNEL_DIR/scripts/dtc/ $KERNEL_DIR/arch/arm/boot/dts/
-
+strip_modules
 }
+
+strip_modules ()
+{
+echo "Copying modules"
+rm $MODULES_DIR/*
+find . -name '*.ko' -exec cp {} $MODULES_DIR/ \;
+cd $MODULES_DIR
+echo "Stripping modules for size"
+$STRIP --strip-unneeded *.ko
+cd $KERNEL_DIR
+}
+
 
 case $1 in
 clean)
@@ -63,11 +75,10 @@ compile_kernel
 esac
 cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../LettuceOutput/tools
 cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../LettuceOutput/tools
+cp $MODULES_DIR/* $MODULES_DIR/../LettuceOutput/system/lib/modules/
 cd $MODULES_DIR/../LettuceOutput
-echo -n "Enter The Zip file Name : "
-read zipfile
-echo $zipfile
-zip -r $zipfile tools META-INF -x *kernel/.gitignore*
+zipfile="RRV1.6Lettuce-$(date +"%Y-%m-%d(%I.%M%p)").zip"
+zip -r $zipfile system tools META-INF -x *kernel/.gitignore*
 dropbox_uploader -p upload $MODULES_DIR/../LettuceOutput/$zipfile /
 dropbox_uploader share /$zipfile
 BUILD_END=$(date +"%s")
