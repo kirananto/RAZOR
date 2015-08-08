@@ -42,6 +42,7 @@ echo "                    "
 echo -e "**********************************************************************************************"
 make cyanogenmod_lettuce-64_defconfig
 make -j12
+make modules
 if ! [ -a $KERN_IMG ];
 then
 echo -e "$red Kernel Compilation failed! Fix the errors! $nocol"
