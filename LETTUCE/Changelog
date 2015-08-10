@@ -5,6 +5,7 @@
 	Updated Prima Drivers
 	Added Adreno Idler
 	Added Quickwake drivers
+	Change SElinux to Permissive
 	android: drivers: workaround debugfs race in binder 
 	Disable some debugs.. and Enabled Diag..
 
