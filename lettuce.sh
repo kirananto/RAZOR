@@ -37,7 +37,7 @@ compile_kernel ()
 {
 echo -e "**********************************************************************************************"
 echo "                    "
-echo "                                        Compiling RaZorReborn kernel                    "
+echo "                                Compiling RaZorReborn for Lettuce                    "
 echo "                    "
 echo -e "**********************************************************************************************"
 make cyanogenmod_lettuce-64_defconfig
@@ -71,4 +71,4 @@ dropbox_uploader share /$zipfile
 BUILD_END=$(date +"%s")
 DIFF=$(($BUILD_END - $BUILD_START))
 echo -e "$yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"
-echo "Enjoy RazorKernel for Lettuce"
+echo "Enjoy RazorReborn for Lettuce"

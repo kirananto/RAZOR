@@ -1,0 +1,40 @@
+* Update v1.6
+
+	Undervolt Cpu
+	Synced with latest CM source
+	Updated Prima Drivers
+	Added Adreno Idler
+	Added Quickwake drivers
+	android: drivers: workaround debugfs race in binder 
+	Disable some debugs.. and Enabled Diag..	
+	
+* Update v1.4
+
+    Fix frequency Scaling issue
+    Synced with latest tree.. commits till today.
+    Change Compiler and use many optimizations
+    Added Hyper and Blu Active governor
+    ipv6: Don't reduce hop limit for an interface
+    sync: don't block the flusher thread waiting on IO
+    SelinUX fIX... Change to Enforcing...
+    Working on Bliss, Exodus and almost all roms...
+
+* Update v1.3
+
+    Merged with latest source...
+    solved booting problem with many roms..
+    -ofast optimizations for better zram and performance
+    Faster and bettery battery backup.. and tweaks..
+
+* Update v1.2
+
+    Fix frequency Scaling issue in some governors
+    Added latest commits from Cyanogenmod
+    No issue with keyboard.. high sensitivity..
+    Added more Hotplugs - AutoSMP , Zen Decision , MAKO
+    Tweaked Yankactive
+    Disabled all hotplugs by default.. now only Thunderplug will be enabled by default
+    Bumped Kernel Version
+    Added Zen IOscheduler
+
+*Initial Release

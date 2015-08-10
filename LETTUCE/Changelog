@@ -1,0 +1,52 @@
+* Update v1.6
+
+	Undervolt Cpu
+	Synced with latest CM source
+	Updated Prima Drivers
+	Added Adreno Idler
+	Added Quickwake drivers
+	android: drivers: workaround debugfs race in binder 
+	Disable some debugs.. and Enabled Diag..
+
+* Update v1.4
+
+    Fix frequency Scaling issue
+    Synced with latest tree.. commits till today.
+    Change Compiler and use many optimizations
+    Fixed Baseband Issue
+    Added Hyper and Blu Active governor
+    ipv6: Don't reduce hop limit for an interface
+    sync: don't block the flusher thread waiting on IO
+    sound: soc: arizona: Work around for lettuce mp3/aac offload ...
+    SelinUX fIX... Change to Enforcing
+
+* Update v1.3
+
+    Fix frequency Scaling issue
+    Synced with latest tree.. commits till today...( proximity and other sensor updates included)
+    Fixed Baseband Issue
+    Fixed Booting issue...
+
+* Update v1.2
+
+    Fix frequency Scaling issue
+    Fix frequency lock issue
+    Added latest commits from Cyanogenmod
+    No issue with keyboard.. high sensitivity..
+    Added more Hotplugs - AutoSMP , Zen Decision , MAKO
+    Tweaked Yankactive
+    Disabled all hotplugs by default.. now only Autosmp will be enabled by default
+    Changed to Sabermod 4.9 LTS for better stability, performance, and bugfree
+    Fixed Baseband Issue
+
+
+
+* Update v1.0 r2
+
+    Disabled Bricked Hotplug
+    Disabled Thunderplug
+    udp: fix behavior of wrong checksums (Cyanogenmod Commit)
+
+​
+
+* Intial Release
