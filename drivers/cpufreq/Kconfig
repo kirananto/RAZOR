@@ -277,11 +277,6 @@ config CPU_FREQ_GOV_SMARTMAX
   help	
     'smartmax' combined ondemand and smartass2
 
-config CPU_FREQ_GOV_PMC
-  tristate "'pmc' cpufreq policy governor"	
-  select CPU_FREQ_TABLE	
-  help	
-    'smartmax' tweaked for absolute battery
 
 config CPU_FREQ_GOV_HELLSACTIVE
 	tristate "'hellsactive' cpufreq policy governor"
