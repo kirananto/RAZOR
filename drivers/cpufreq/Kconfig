@@ -103,6 +103,63 @@ config CPU_FREQ_DEFAULT_GOV_SMARTMAX
 	help
 	  Use the CPUFreq governor 'smartmax' as default
 
+config CPU_FREQ_DEFAULT_GOV_DANCEDANCE
+            bool "dancedance"
+            select CPU_FREQ_GOV_DANCEDANCE
+            help
+              Use the CPUFreq governor 'dancedance' as default.
+
+config CPU_FREQ_DEFAULT_GOV_LIONHEART
+            bool "lionheart"
+            select CPU_FREQ_GOV_LIONHEART
+            help
+              Use the CPUFreq governor 'lionheart' as default.
+
+config CPU_FREQ_DEFAULT_GOV_NIGHTMARE
+	bool "nightmare"
+	select CPU_FREQ_GOV_NIGHTMARE
+	help
+
+config CPU_FREQ_DEFAULT_GOV_ADAPTIVE
+	bool "adaptive"
+	select CPU_FREQ_GOV_ADAPTIVE
+	---help---
+	  Use the CPUFreq governor 'adaptive' as default. This allows
+	  you to get a full dynamic cpu frequency capable system by simply
+	  loading your cpufreq low-level hardware driver, using the
+	  'adaptive' governor for latency-sensitive workloads and demanding
+	  performance.
+
+config CPU_FREQ_DEFAULT_GOV_DESPAIR
+	bool "despair"
+	select CPU_FREQ_GOV_DESPAIR
+	help
+
+config CPU_FREQ_DEFAULT_GOV_WHEATLEY
+	bool "wheatley"
+	select CPU_FREQ_GOV_WHEATLEY
+	select CPU_FREQ_GOV_PERFORMANCE
+	---help---
+	  Use the CPUFreq governor 'wheatley' as default.
+
+
+config CPU_FREQ_DEFAULT_GOV_BARRY_ALLEN
+	bool "barry_allen"
+	select CPU_FREQ_GOV_BARRY_ALLEN
+	help
+	  Use the CPUFreq governor 'barry_allen' as default. This allows
+	  you to get a full dynamic cpu frequency capable system by simply
+	  loading your cpufreq low-level hardware driver, using the
+	  'barry_allen' governor for latency-sensitive workloads.
+
+config CPU_FREQ_DEFAULT_GOV_ZZMOOVE
+	  bool "zzmoove"
+	  select CPU_FREQ_GOV_ZZMOOVE
+	  select CPU_FREQ_GOV_PERFORMANCE
+	  help
+	  Use the CPUFreq governor 'zzmoove' as default, using predefined
+	  frequency lookup tables and optimized scaling triggers instead 
+	  % frequency steps to get smooth up/downscaling dependant on CPU load.
 config CPU_FREQ_DEFAULT_GOV_ELEMENTALX
 	bool "elementalx"
 	select CPU_FREQ_GOV_ELEMENTALX
@@ -131,6 +188,14 @@ config CPU_FREQ_DEFAULT_GOV_BIOSHOCK
 	help
 	  Default governor of BioShock kernel
 
+config CPU_FREQ_DEFAULT_GOV_INTELLIACTIVE
+	bool "intelliactive"
+	select CPU_FREQ_GOV_INTELLIACTIVE
+	help
+	  Use the CPUFreq governor 'intelliactive' as default. This allows
+	  you to get a full dynamic cpu frequency capable system by simply
+	  loading your cpufreq low-level hardware driver, using the
+	  'interactive' governor for latency-sensitive workloads.
 	  
 config CPU_FREQ_DEFAULT_GOV_YANKACTIVE
 	bool "yankactive"
@@ -277,6 +342,90 @@ config CPU_FREQ_GOV_SMARTMAX
   help	
     'smartmax' combined ondemand and smartass2
 
+config CPU_FREQ_GOV_DANCEDANCE
+           tristate "'dancedance' cpufreq governor"
+           depends on CPU_FREQ
+           help
+             dancedance' - a "smart" optimized governor!
+             If in doubt, say N.
+
+config CPU_FREQ_GOV_LIONHEART
+           tristate "'lionheart' cpufreq governor"
+           depends on CPU_FREQ
+           help
+             lionheart' - a "smart" optimized governor!
+             If in doubt, say N.
+
+config CPU_FREQ_GOV_NIGHTMARE
+	tristate "'nightmare' cpufreq governor"
+	depends on CPU_FREQ
+
+config CPU_FREQ_GOV_DESPAIR
+	tristate "'despair' cpufreq governor"
+	depends on CPU_FREQ
+
+config CPU_FREQ_GOV_ADAPTIVE
+	tristate "'adaptive' cpufreq policy governor"
+	---help---
+	  'adaptive' - This driver adds a dynamic cpufreq policy governor
+	  designed for latency-sensitive workloads and also for demanding
+	  performance.
+
+	  This governor attempts to reduce the latency of clock
+	  increases so that the system is more responsive to
+	  interactive workloads in loweset steady-state but to
+	  to reduce power consumption in middle operation level level up
+	  will be done in step by step to prohibit system from going to
+	  max operation level.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called cpufreq_adaptive.
+
+	  For details, take a look at linux/Documentation/cpu-freq.
+
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_WHEATLEY
+	tristate "'wheatley' cpufreq governor"
+	depends on CPU_FREQ
+
+config CPU_FREQ_GOV_ZZMOOVE
+	tristate "'zzmoove' cpufreq governor"
+	depends on CPU_FREQ
+
+config CPU_FREQ_GOV_INTELLIACTIVE
+	tristate "'intelliactive' cpufreq policy governor"
+	help
+	  'intelliactive' - This driver adds a dynamic cpufreq policy governor
+	  designed for latency-sensitive workloads.
+
+	  This governor attempts to reduce the latency of clock
+	  increases so that the system is more responsive to
+	  interactive workloads.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called cpufreq_interactive.
+
+	  For details, take a look at linux/Documentation/cpu-freq.
+
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_BARRY_ALLEN
+	tristate "'barry_allen' cpufreq policy governor"
+	help
+	  'barry_allen' - This driver adds a dynamic cpufreq policy governor
+	  designed for latency-sensitive workloads.
+
+	  This governor attempts to reduce the latency of clock
+	  increases so that the system is more responsive to
+	  barry_allen workloads.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called cpufreq_barry_allen.
+
+	  For details, take a look at linux/Documentation/cpu-freq.
+
+	  If in doubt, say N.
 
 config CPU_FREQ_GOV_HELLSACTIVE
 	tristate "'hellsactive' cpufreq policy governor"
