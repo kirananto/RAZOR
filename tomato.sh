@@ -77,7 +77,7 @@ cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../TomatoOutput/tools
 mv $MODULES_DIR/../TomatoOutput/tools/Image $MODULES_DIR/../TomatoOutput/tools/zImage
 cp $MODULES_DIR/* $MODULES_DIR/../TomatoOutput/system/lib/modules/
 cd $MODULES_DIR/../TomatoOutput
-zipfile="RRV1.8TOMATO-$(date +"%Y-%m-%d(%I.%M%p)").zip"
+zipfile="RRV1.8TOMATOUBER-$(date +"%Y-%m-%d(%I.%M%p)").zip"
 zip -r $zipfile system tools META-INF -x *kernel/.gitignore*
 dropbox_uploader -p upload $MODULES_DIR/../TomatoOutput/$zipfile /
 dropbox_uploader share /$zipfile
