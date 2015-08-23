@@ -72,13 +72,12 @@ rm -rf $KERNEL_DIR/arch/arm/boot/dt.img
 compile_kernel
 ;;
 esac
-cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../TomatoOutput/tools
-cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../TomatoOutput/tools
-mv $MODULES_DIR/../TomatoOutput/tools/Image $MODULES_DIR/../TomatoOutput/tools/zImage
-cp $MODULES_DIR/* $MODULES_DIR/../TomatoOutput/system/lib/modules/
+cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../TomatoOutput/zImage
+cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../TomatoOutput
+cp $MODULES_DIR/* $MODULES_DIR/../TomatoOutput/modules/
 cd $MODULES_DIR/../TomatoOutput
-zipfile="RRV1.8TOMATOUBER-$(date +"%Y-%m-%d(%I.%M%p)").zip"
-zip -r $zipfile system tools META-INF -x *kernel/.gitignore*
+zipfile="RRV2.0TOMATOUBER-$(date +"%Y-%m-%d(%I.%M%p)").zip"
+zip -r $zipfile modules patch ramdisk tools anykernel.sh dt.img zImage META-INF -x *kernel/.gitignore*
 dropbox_uploader -p upload $MODULES_DIR/../TomatoOutput/$zipfile /
 dropbox_uploader share /$zipfile
 BUILD_END=$(date +"%s")

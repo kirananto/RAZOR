@@ -63,7 +63,7 @@ esac
 cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../LettuceOutput/tools
 cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../LettuceOutput/tools
 cd $MODULES_DIR/../LettuceOutput
-zipfile="RRV1.8LettuceUBER-$(date +"%Y-%m-%d(%I.%M%p)").zip"
+zipfile="RRV2.0LettuceUBER-$(date +"%Y-%m-%d(%I.%M%p)").zip"
 echo $zipfile
 zip -r $zipfile tools META-INF -x *kernel/.gitignore*
 dropbox_uploader -p upload $MODULES_DIR/../LettuceOutput/$zipfile /
