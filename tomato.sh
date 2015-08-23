@@ -35,6 +35,10 @@ MODULES_DIR=$KERNEL_DIR/../RaZORBUILDOUTPUT/Common
 
 compile_kernel ()
 {
+rm $MODULES_DIR/../TomatoOutput/dt.img
+rm $MODULES_DIR/../TomatoOutput/zImage
+rm $KERNEL_DIR/arch/arm64/boot/Image
+rm $KERNEL_DIR/arch/arm64/boot/dt.img
 echo -e "**********************************************************************************************"
 echo "                    "
 echo "                                        Compiling RaZorReborn kernel                    "
