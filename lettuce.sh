@@ -35,9 +35,10 @@ MODULES_DIR=$KERNEL_DIR/../RaZORBUILDOUTPUT/Common
 
 compile_kernel ()
 {
-rm -rf $KERNEL_DIR/arch/arm/boot/dt.img
-rm -rf $KERNEL_DIR/arch/arm/boot/zImage
-rm -rf $KERNEL_DIR/arch/arm/boot/dt.img
+rm -f arch/arm/boot/dts/*.dtb
+rm -rf $KERNEL_DIR/arch/arm64/boot/dt.img
+rm -rf $KERNEL_DIR/arch/arm64/boot/Image
+rm -rf $KERNEL_DIR/arch/arm64/boot/Image.gz
 rm -rf $MODULES_DIR/../LettuceOutput/zImage
 rm -rf $MODULES_DIR/../LettuceOutput/dt.img
 echo -e "**********************************************************************************************"
