@@ -98,7 +98,7 @@ cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../TomatoOutput/zImage
 cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../TomatoOutput
 cp $MODULES_DIR/* $MODULES_DIR/../TomatoOutput/modules/
 cd $MODULES_DIR/../TomatoOutput
-zipfile="RRV2.0TOMATOUBER-$(date +"%Y-%m-%d(%I.%M%p)").zip"
+zipfile="RRV2.2TOMATOSABER-$(date +"%Y-%m-%d(%I.%M%p)").zip"
 zip -r $zipfile modules patch ramdisk tools anykernel.sh dt.img zImage META-INF etc -x *kernel/.gitignore*
 dropbox_uploader -p upload $MODULES_DIR/../TomatoOutput/$zipfile /
 dropbox_uploader share /$zipfile
