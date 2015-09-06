@@ -69,7 +69,7 @@ esac
 cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../LettuceOutput/zImage
 cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../LettuceOutput/
 cd $MODULES_DIR/../LettuceOutput
-zipfile="RRV2.0LettuceUBER-$(date +"%Y-%m-%d(%I.%M%p)").zip"
+zipfile="RRV2.2LettuceUBER-$(date +"%Y-%m-%d(%I.%M%p)").zip"
 zip -r $zipfile META-INF ramdisk tools anykernel.sh dt.img zImage
 echo $zipfile
 BUILD_END=$(date +"%s")
