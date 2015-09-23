@@ -95,7 +95,7 @@ cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../TomatoOutput/anykernel/zIm
 cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../TomatoOutput/anykernel/
 cp $MODULES_DIR/* $MODULES_DIR/../TomatoOutput/anykernel/system/lib/modules/
 cd $MODULES_DIR/../TomatoOutput/anykernel/
-zipfile="RR3.0Tomato-Test-$(date +"%Y-%m-%d(%I.%M%p)").zip"
+zipfile="RR3.0Tomato-Test-0.9$(date +"%Y-%m-%d(%I.%M%p)").zip"
 zip -r ../$zipfile ramdisk anykernel.sh dt.img README zImage system tools META-INF -x *kernel/.gitignore*
 dropbox_uploader -p upload $MODULES_DIR/../TomatoOutput/$zipfile /test/
 dropbox_uploader share /test/$zipfile
