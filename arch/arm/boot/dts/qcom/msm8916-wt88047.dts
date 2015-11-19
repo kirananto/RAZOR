@@ -19,7 +19,7 @@
 / {
 	model = "Qualcomm Technologies, Inc. MSM 8916 WT88047";
 	compatible = "qcom,msm8916-qrd", "qcom,msm8916", "qcom,qrd";
-	qcom,board-id = <0x1010b 7>, <0x1000b 5>, <0x1010b 5>, <0x3010b 5>;
+	qcom,board-id = <0x1010b 7>;
 };
 
 &soc {
@@ -66,7 +66,7 @@
 			compatible = "focaltech,5x06";
 			reg = <0x38>;
 			interrupt-parent = <&msm_gpio>;
-			interrupts = <13 0x2008>;
+			interrupts = <13 0x2>;
 			vdd-supply = <&pm8916_l17>;
 			vcc_i2c-supply = <&pm8916_l6>;
 			pinctrl-names = "pmx_ts_active","pmx_ts_suspend","pmx_ts_release";
@@ -76,7 +76,7 @@
 			focaltech,name = "ft6436";
 			focaltech,family-id = <0x36>;
 			focaltech,reset-gpio = <&msm_gpio 12 0x0>;
-			focaltech,irq-gpio = <&msm_gpio 13 0x2008>;
+			focaltech,irq-gpio = <&msm_gpio 13 0x0>;
 			focaltech,display-coords = <0 0 720 1280>;
 			focaltech,panel-coords = <0 0 720 1280>;
 			focaltech,button-map= <139 102 158>;
@@ -148,7 +148,6 @@
 };
 
 &pm8916_pon {
-	/delete-property/ qcom,store-hard-reset-reason;
 	qcom,poweron-vadc = <&pm8916_vadc>;
 
 	qcom,pon_1 {
@@ -172,7 +171,7 @@
 &pm8916_gpios {
 	gpio@c100 { /* GPIO 2 */
 		/* NFC_CLK_REQ */
-		status = "ok";
+		status = "disabled";
 	};
 
 	gpio@c200 { /* GPIO 3 */
