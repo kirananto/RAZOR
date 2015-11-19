@@ -422,6 +422,12 @@ struct mmc_card {
 	struct notifier_block        reboot_notify;
 	bool issue_long_pon;
 	u8 *cached_ext_csd;
+	
+#define MMC_ERROR_FAILURE_RATIO	10		/* give up on cards with too many failures/successes */
+#define MMC_ERROR_FORGIVE_RATIO	10		/* forgive cards with enough successes/failures */
+	unsigned int		failures;	/* number of recent request failures */
+	unsigned int		successes;	/* successful requests since 1st recorded failure  */
+
 };
 
 /*
