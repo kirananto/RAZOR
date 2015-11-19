@@ -16,7 +16,6 @@
  #
 KERNEL_DIR=$PWD
 KERN_IMG=$KERNEL_DIR/arch/arm/boot/Image
-DTBTOOL=$KERNEL_DIR/tools/dtbToolCM
 MODULES_DIR=$KERNEL_DIR/../RaZORBUILDOUTPUT/Common
 BUILD_START=$(date +"%s")
 blue='\033[0;34m'
@@ -35,11 +34,9 @@ STRIP="$MODULES_DIR/../../../Toolchains/arm-eabi-5.2/bin/arm-eabi-strip"
 
 compile_kernel ()
 {
-rm $MODULES_DIR/../TomatoOutput/anykernel/dt.img
-rm $MODULES_DIR/../TomatoOutput/anykernel/zImage
-rm $MODULES_DIR/../TomatoOutput/anykernel/system/lib/modules/*
-rm $KERNEL_DIR/arch/arm64/boot/Image
-rm $KERNEL_DIR/arch/arm64/boot/dt.img
+rm $MODULES_DIR/../RedmiOutput/anykernel/zImage
+rm $MODULES_DIR/../RedmiOutput/anykernel/modules/*
+rm $KERNEL_DIR/arch/arm/boot/zImage
 echo -e "****************************************************"
 echo -e "****************************************************"
 echo -e "         _____   _____  _______ _____  _____   "
@@ -65,7 +62,6 @@ then
 echo -e "$red Kernel Compilation failed! Fix the errors! $nocol"
 exit 1
 fi
-$DTBTOOL -2 -o $KERNEL_DIR/arch/arm64/boot/dt.img -s 2048 -p $KERNEL_DIR/scripts/dtc/ $KERNEL_DIR/arch/arm/boot/dts/
 strip_modules
 }
 
@@ -83,20 +79,18 @@ cd $KERNEL_DIR
 
 case $1 in
 clean)
-make ARCH=arm64 -j8 clean mrproper
-rm -rf $KERNEL_DIR/arch/arm/boot/dt.img
+make ARCH=arm -j8 clean mrproper
 ;;
 *)
 compile_kernel
 ;;
 esac
-cp $KERNEL_DIR/arch/arm64/boot/Image  $MODULES_DIR/../TomatoOutput/anykernel/zImage
-cp $KERNEL_DIR/arch/arm64/boot/dt.img  $MODULES_DIR/../TomatoOutput/anykernel/
-cp $MODULES_DIR/* $MODULES_DIR/../TomatoOutput/anykernel/system/lib/modules/
-cd $MODULES_DIR/../TomatoOutput/anykernel/
-zipfile="RR3.0Tomato-Test-0.9$(date +"%Y-%m-%d(%I.%M%p)").zip"
-zip -r ../$zipfile ramdisk anykernel.sh dt.img README zImage system tools META-INF -x *kernel/.gitignore*
-dropbox_uploader -p upload $MODULES_DIR/../TomatoOutput/$zipfile /test/
+cp $KERNEL_DIR/arch/arm/boot/zImage  $MODULES_DIR/../RedmiOutput/anykernel/zImage
+cp $MODULES_DIR/* $MODULES_DIR/../RedmiOutput/anykernel/modules/
+cd $MODULES_DIR/../RedmiOutput/anykernel/
+zipfile="RR1.0-REDMI-ALPHA-0.9-$(date +"%Y-%m-%d(%I.%M%p)").zip"
+zip -r ../$zipfile ramdisk anykernel.sh dtb modules zImage patch tools META-INF -x *kernel/.gitignore*
+dropbox_uploader -p upload $MODULES_DIR/../RedmiOutput/$zipfile /test/
 dropbox_uploader share /test/$zipfile
 BUILD_END=$(date +"%s")
 DIFF=$(($BUILD_END - $BUILD_START))
