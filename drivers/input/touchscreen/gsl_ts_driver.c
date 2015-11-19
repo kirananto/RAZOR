@@ -1477,14 +1477,25 @@ static ssize_t gsl_sysfs_tpgesture_show(struct device *dev,
 static ssize_t gsl_sysfs_tpgesturet_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
+	struct gsl_ts_data *ts = ddata;
+	struct i2c_client *gsl_client = ts->client;
+	int old_gesture_flag;
+
 	mutex_lock(&ddata->hw_lock);
+	old_gesture_flag = gsl_gesture_flag;
 	if(buf[0] == '0'){
 		gsl_gesture_flag = 0;  
+		if (old_gesture_flag)
+			disable_irq_wake(gsl_client->irq);
 	}else if(buf[0] == '1'){
 		gsl_gesture_flag = 1;
+		if (!old_gesture_flag)
+			enable_irq_wake(gsl_client->irq);
 	}else if(buf[0] == '2'){
 	//enable character gesture
 		gsl_gesture_flag = 2;
+		if (!old_gesture_flag)
+			enable_irq_wake(gsl_client->irq);
 	}
 	mutex_unlock(&ddata->hw_lock);
 
@@ -1794,13 +1805,14 @@ static irqreturn_t gsl_ts_isr(int irq, void *priv)
 				gsl_gesture_c = (char)(tmp_c & 0xff);
 				gsl_gesture_status = GE_WAKEUP;
 				print_info("gsl_obtain_gesture():tmp_c=%c\n",gsl_gesture_c);
+				wake_lock_timeout(&ddata->gesture_wake_lock,
+					GSL_GESTURE_WAKELOCK_DUR);
 				//input_report_key(tpd->dev,key_data,1);
 				input_report_key(idev, KEY_POWER,1);
 				input_sync(idev);
 				//input_report_key(tpd->dev,key_data,0);
 				input_report_key(idev,KEY_POWER,0);
 				input_sync(idev);
-				mdelay(50);
 			}
 			goto schedule;
 		}
@@ -2350,6 +2362,8 @@ static int gsl_ts_probe(struct i2c_client *client, const struct i2c_device_id *i
 
 #ifdef GSL_GESTURE
 	set_bit(KEY_POWER, gesture_bmp);
+	wake_lock_init(&ddata->gesture_wake_lock,
+		WAKE_LOCK_SUSPEND, "gsl_ts_gesture");
 #endif
 
 /* TODO - get IRQ from device tree */
@@ -2375,6 +2389,9 @@ static int gsl_ts_probe(struct i2c_client *client, const struct i2c_device_id *i
 
 
 exit_irq_request_failed:
+#ifdef GSL_GESTURE
+	wake_lock_destroy(&ddata->gesture_wake_lock);
+#endif
 	#if defined(CONFIG_FB)
 	if (fb_unregister_client(&ddata->fb_notif))
 		dev_err(&client->dev,
@@ -2399,6 +2416,10 @@ static int  gsl_ts_remove(struct i2c_client *client)
 {
 
 	print_info("==gslX68X_ts_remove=\n");
+
+#ifdef GSL_GESTURE
+	wake_lock_destroy(&ddata->gesture_wake_lock);
+#endif
 	
 	if (fb_unregister_client(&ddata->fb_notif))
 			dev_err(&client->dev,"Error occurred while unregistering fb_notifier.\n");
@@ -2424,57 +2445,6 @@ static const struct i2c_device_id gsl_ts_id[] = {
 	{ }
 };
 
-#ifdef CONFIG_PM
-static int gsl_ts_pm_suspend(struct device *dev)
-{
-	struct gsl_ts_data *ddata = dev_get_drvdata(dev);
-
-#ifdef GSL_GESTURE
-	/* expect the screen to be blanked when suspended */
-	if (WARN_ON(!dozing))
-		return -EAGAIN;
-#endif
-
-	/* there shouldn't be any pending delayed work when dozing */
-	if (WARN_ON(delayed_work_pending(&gsl_timer_check_work)))
-		return -EAGAIN;
-
-	disable_irq(ddata->client->irq);
-
-#ifdef GSL_GESTURE
-	if (gsl_gesture_flag) {
-		dev_dbg(dev, "suspend: wake up enabled\n");
-		enable_irq_wake(ddata->client->irq);
-	} else {
-		dev_dbg(dev, "suspend: wake up disabled\n");
-	}
-#else
-	dev_dbg(dev, "suspend: wake up disabled\n");
-#endif
-
-	return 0;
-}
-
-static int gsl_ts_pm_resume(struct device *dev)
-{
-	struct gsl_ts_data *ddata = dev_get_drvdata(dev);
-
-#ifdef GSL_GESTURE
-	if (gsl_gesture_flag)
-		disable_irq_wake(ddata->client->irq);
-#endif
-
-	enable_irq(ddata->client->irq);
-
-	dev_dbg(dev, "resume\n");
-	return 0;
-}
-
-SIMPLE_DEV_PM_OPS(gsl_ts_pm_ops, gsl_ts_pm_suspend, gsl_ts_pm_resume);
-#else
-#define gsl_ts_pm_ops NULL
-#endif /* CONFIG_PM */
-
 MODULE_DEVICE_TABLE(i2c, gsl_ts_id);
 
 #if defined(CONFIG_FB)
@@ -2491,7 +2461,6 @@ static struct i2c_driver gsl_ts_driver = {
 		.name = GSL_TS_NAME,
         .owner    = THIS_MODULE,
 		.of_match_table = gsl_match_table,
-		.pm = &gsl_ts_pm_ops,
 	},
 	.probe = gsl_ts_probe,
 	.remove = gsl_ts_remove,
