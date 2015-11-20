@@ -25,14 +25,14 @@ yellow='\033[0;33m'
 red='\033[0;31m'
 nocol='\033[0m'
 # Modify the following variable if you want to build
-export CROSS_COMPILE="$MODULES_DIR/../../../Toolchains/aarch64-linux-android-5.2-kernel/bin/aarch64-linux-android-"
-export LD_LIBRARY_PATH="$MODULES_DIR/../../../Toolchains/sabermod-prebuilts/usr/lib/"
+export CROSS_COMPILE="$KERNEL_DIR/../../Toolchains/aarch64-linux-android-5.2-kernel/bin/aarch64-linux-android-"
+export LD_LIBRARY_PATH="$KERNEL_DIR/../../Toolchains/sabermod-prebuilts/usr/lib/"
 export USE_CCACHE=1
 export ARCH=arm64
 export SUBARCH=arm64
 export KBUILD_BUILD_USER="Kiran.Anto"
 export KBUILD_BUILD_HOST="RaZor-Machine"
-STRIP="$MODULES_DIR/../../../Toolchains/aarch64-linux-android-5.2-kernel/bin/aarch64-linux-android-strip"
+STRIP="$KERNEL_DIR/../../Toolchains/aarch64-linux-android-5.2-kernel/bin/aarch64-linux-android-strip"
 
 compile_kernel ()
 {

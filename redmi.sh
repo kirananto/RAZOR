@@ -24,13 +24,13 @@ yellow='\033[0;33m'
 red='\033[0;31m'
 nocol='\033[0m'
 # Modify the following variable if you want to build
-export CROSS_COMPILE="$MODULES_DIR/../../../Toolchains/arm-eabi-5.2/bin/arm-eabi-"
+export CROSS_COMPILE="$KERNEL_DIR/../../Toolchains/arm-eabi-5.2/bin/arm-eabi-"
 export USE_CCACHE=1
 export ARCH=arm
 export SUBARCH=arm
 export KBUILD_BUILD_USER="Kiran.Anto"
 export KBUILD_BUILD_HOST="RaZor-Machine"
-STRIP="$MODULES_DIR/../../../Toolchains/arm-eabi-5.2/bin/arm-eabi-strip"
+STRIP="$KERNEL_DIR/../../Toolchains/arm-eabi-5.2/bin/arm-eabi-strip"
 
 compile_kernel ()
 {
