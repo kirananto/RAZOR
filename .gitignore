@@ -16,6 +16,8 @@
 *.a
 *.s
 *.ko
+*.zip
+*).zip
 *.so
 *.so.dbg
 *.mod.c
